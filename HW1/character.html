@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>角色頁面</title>
+  <h2 style="margin-bottom: 10px; font-weight: bold; color: #5e3c22;">角色條件篩選</h2>
+  <link rel="stylesheet" href="character.css">
+  <style>
+    .filters {
+      margin: 20px;
+    }
+    .character-card {
+      display: inline-block;
+      width: 150px;
+      margin: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .character-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .home-button {
+    margin-top: 30px;
+    text-align: center;
+    }
+
+    .home-button a {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: #a87432; /* 金棕色 */
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.05em;
+    text-decoration: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.25s ease;
+    }
+
+    .home-button a:hover {
+    background-color: #b7843d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .home-top-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    background-color: #a87432;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.25s ease;
+    }
+
+    .home-top-button:hover {
+    background-color: #b7843d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="filters">
+    <label>陣營：
+      <select id="faction">
+        <option value="">全部</option>
+        <option>帝國</option>
+        <option>大陸魔法使協會</option>
+        <option>魔王軍</option>
+        <option>無</option>
+      </select>
+    </label>
+
+    <label>種族：
+      <select id="race">
+        <option value="">全部</option>
+        <option>人類</option>
+        <option>精靈</option>
+        <option>魔族</option>
+      </select>
+    </label>
+
+    <label>職業：
+      <select id="role">
+        <option value="">全部</option>
+        <option>魔法使</option>
+        <option>戰士</option>
+        <option>僧侶</option>
+      </select>
+    </label>
+
+    <button onclick="filterCharacters()">確定</button>
+    <a href="index.html" class="home-top-button">← 回首頁</a>
+  </div>
+
+  <div id="result"></div>
+
+  <script src="characters.js"></script>
+  <script>
+    function createCard(c) {
+      const card = document.createElement('div');
+      card.className = 'character-card';
+      card.innerHTML = `
+        <img src="${c.image}" alt="${c.name}">
+        <div>${c.name}</div>
+      `;
+      card.onclick = () => {
+        window.location.href = `character-detail.html?id=${c.id}`;
+      };
+      return card;
+    }
+
+    function filterCharacters() {
+      const faction = document.getElementById('faction').value;
+      const race = document.getElementById('race').value;
+      const role = document.getElementById('role').value;
+
+      const filtered = characters.filter(c =>
+        (!faction || c.faction === faction) &&
+        (!race || c.race === race) &&
+        (!role || c.role === role)
+      );
+
+      renderResults(filtered);
+    }
+
+    function renderResults(list) {
+      const result = document.getElementById('result');
+      result.innerHTML = '';
+      list.forEach(c => {
+        result.appendChild(createCard(c));
+      });
+    }
+
+    // 預設載入所有角色
+    window.onload = () => {
+      renderResults(characters);
+    };
+  </script>
+</body>
+</html>
