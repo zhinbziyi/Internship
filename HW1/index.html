@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>葬送的芙莉蓮</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="title-ch"></h1>
+        <h2 id="title-jp"></h2>
+        <div class="intro-section">
+            <img id="anime-image" src="" alt="芙莉蓮圖片">
+
+            <div class="info">
+                <p><strong>漫畫連載：</strong><span id="aired-manga"></span></p>
+                <p><strong>動畫播放：</strong><span id="aired-anime"></span></p>
+                <p><strong>漫畫出版社：</strong><span id="publisher"></span></p>
+                <p><strong>漫畫卷數：</strong><span id="manga-volumes"></span> 卷 / <strong>章節：</strong><span id="manga-chapters"></span> 話</p>
+                <p><strong>動畫集數：</strong><span id="anime-episodes"></span></p>
+                <p><strong>連載狀態：</strong><span id="status"></span></p>
+                <p><strong>每集時長：</strong><span id="duration"></span></p>
+                <p><strong>動畫製作：</strong><span id="staff"></span></p>
+                <p><strong>音樂：</strong><span id="music"></span></p>
+                <p><strong>類型：</strong><span id="genres"></span></p>
+            </div>
+        </div>
+
+        <div class="synopsis">
+            <h2>劇情簡介</h2>
+            <p id="synopsis"></p>
+        </div>
+
+        <div class="trailer">
+            <h2>預告片</h2>
+            <div class="trailer-carousel">
+                <div class="arrow left">◀</div>
+
+                    <div class="trailer-frame-wrapper">
+                        <iframe id="trailer" class="trailer-frame" allowfullscreen></iframe>
+                    </div>
+
+                <div class="arrow right">▶</div>
+            </div>
+
+            <a id="external-link" href="#" target="_blank">🔗 前往 YouTube 觀看完整預告片</a>
+        </div>
+        
+        <div class="button-wrapper">
+            <a href="character.html" class="character-btn">前往角色頁面</a>
+        </div>
+    </div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
