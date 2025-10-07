@@ -1,0 +1,169 @@
+body {
+  background: #f3e9d2; /* 米黃色像羊皮紙 */
+  font-family: 'EB Garamond', serif;
+  color: #3b2f2f; /* 深棕文字 */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  border: 2px solid #c2a97c; /* 金棕邊框 */
+  background: #fffef9; /* 更亮更柔的卡片背景 */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+h1 {
+  font-size: 40px; /* 更大一點，看起來像主標題 */
+  color: #8b5e3c;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 24px; /* 略小於 h1 */
+  color: #8b5e3c;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.intro-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+}
+
+.intro-section img {
+  max-width: 280px;     /* 放大圖片寬度，原為 250px */
+  width: 100%;          /* 讓圖片在容器內撐滿 */
+  height: auto;         /* 保持等比例 */
+  flex-shrink: 0;       /* 防止圖片被壓縮 */
+}
+
+.intro-section .info {
+  flex: 1;
+  min-width: 200px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  margin: 20px auto;
+  border: 3px solid #d4b277;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(139, 94, 60, 0.3);
+}
+
+.info p, .synopsis p {
+  line-height: 1.8;
+  font-size: 17px;
+  margin: 8px 0;
+}
+
+.synopsis, .trailer {
+  margin-top: 30px;
+}
+
+/* 強調文字 */
+strong {
+  color: #6a4e32;
+}
+
+/* 預告片區塊 */
+.trailer {
+  position: relative;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.trailer-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: nowrap; /* 防止換行（重要） */
+}
+
+.trailer-frame-wrapper {
+  width: 90%; /* 原本是 800px */
+  max-width: 720px; /* 控制最大寬度 */
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+
+.trailer-frame {
+  width: 100%;
+  height: 100%;
+  border: 3px solid #d4b277;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(139, 94, 60, 0.3);
+  transition: opacity 0.5s ease;
+}
+
+/* 左右箭頭按鈕 */
+.arrow {
+  background-color: #fffef9;
+  color: #8b5e3c;
+  border: 2px solid #d4b277;
+  border-radius: 50%;
+  font-size: 2rem;
+  padding: 10px 16px;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.arrow:hover {
+  background-color: #f0e6cc;
+  transform: scale(1.2);
+}
+
+.arrow.left {
+  left: -40px;
+}
+
+.arrow.right {
+  right: -40px;
+}
+
+/* 無法嵌入時的 YouTube 外部連結 */
+#external-link {
+  display: none;
+  margin-top: 12px;
+  font-size: 16px;
+  color: #b77b2f;
+  text-decoration: underline;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* 前往角色頁面按鈕 */
+.character-btn {
+  display: inline-block;
+  margin-top: 0px;
+  padding: 16px 36px; /* 放大內距 */
+  font-size: 20px;     /* 放大字體 */
+  font-family: 'EB Garamond', serif;
+  background-color: #a4712b;  /* 改成濃一點的金棕色 */
+  color: #fffef9;            /* 淡米色字 */
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* 陰影讓它浮起來 */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.character-btn:hover {
+  background-color: #c18738;  /* 比原色淺一點的金色 */
+  transform: scale(1.05);     /* 鼠標移上時微放大 */
+}
