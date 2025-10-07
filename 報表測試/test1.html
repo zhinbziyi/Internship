@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>測試用 HTML 報表</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    th { background-color: #f4f4f4; }
+    tbody tr:nth-child(odd) { background-color: #fbfbfb; }
+    .category-row td { background-color: #e0e0e0; font-weight: bold; text-align: left; }
+    tfoot td { font-weight: bold; }
+    .summary { margin-top: 30px; }
+    .summary p { font-size: 1.1em; }
+  </style>
+</head>
+<body>
+  <h1>銷售報表</h1>
+  <p>生成日期：<span id="reportDate"></span></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th rowspan="2">編號</th>
+        <th colspan="2">產品資訊</th>
+        <th colspan="2">銷售數據</th>
+      </tr>
+      <tr>
+        <th>名稱</th>
+        <th>類別</th>
+        <th>數量</th>
+        <th>價格 (NT$)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 電子 類別 -->
+      <tr class="category-row"><td colspan="5">類別：電子</td></tr>
+      <tr>
+        <td>1</td>
+        <td>產品 A</td>
+        <td>電子</td>
+        <td>10</td>
+        <td>1,200</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>產品 E</td>
+        <td>電子</td>
+        <td>7</td>
+        <td>2,500</td>
+      </tr>
+
+      <!-- 家居 類別 -->
+      <tr class="category-row"><td colspan="5">類別：家居</td></tr>
+      <tr>
+        <td>3</td>
+        <td>產品 B</td>
+        <td>家居</td>
+        <td>5</td>
+        <td>850</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>產品 F</td>
+        <td>家居</td>
+        <td>12</td>
+        <td>1,100</td>
+      </tr>
+
+      <!-- 文具 類別 -->
+      <tr class="category-row"><td colspan="5">類別：文具</td></tr>
+      <tr>
+        <td>5</td>
+        <td>產品 C</td>
+        <td>文具</td>
+        <td>20</td>
+        <td>150</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>產品 G</td>
+        <td>文具</td>
+        <td>30</td>
+        <td>75</td>
+      </tr>
+
+      <!-- 食品 類別 -->
+      <tr class="category-row"><td colspan="5">類別：食品</td></tr>
+      <tr>
+        <td>7</td>
+        <td>產品 D</td>
+        <td>食品</td>
+        <td>15</td>
+        <td>120</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>產品 H</td>
+        <td>食品</td>
+        <td>25</td>
+        <td>200</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">總計</td>
+        <td>94</td>
+        <td>6,245</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="summary">
+    <p>總項目數：8</p>
+    <p>總金額：<strong>6,245 NT$</strong></p>
+  </div>
+
+  <script>
+    document.getElementById('reportDate').textContent = new Date().toLocaleString('zh-TW', {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+  </script>
+</body>
+</html>

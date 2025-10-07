@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>測試用雙表格</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f4f4f4; }
+    .section { margin-bottom: 40px; }
+    .section h2 { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>雙表格測試頁</h1>
+
+  <div class="section">
+    <h2>表格 1：產品清單</h2>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>產品名稱</th><th>類別</th><th>庫存數量</th><th>單價 (NT$)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>101</td><td>無線滑鼠</td><td>電子</td><td>35</td><td>450</td></tr>
+        <tr><td>102</td><td>藍牙鍵盤</td><td>電子</td><td>20</td><td>850</td></tr>
+        <tr><td>103</td><td>液晶顯示器</td><td>電子</td><td>12</td><td>3200</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="3">總計</td><td>67</td><td></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>表格 2：銷售記錄</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>日期</th><th>訂單編號</th><th>產品ID</th><th>數量</th><th>金額 (NT$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2025-08-01</td><td>SO-5001</td><td>101</td><td>2</td><td>900</td></tr>
+        <tr><td>2025-08-02</td><td>SO-5002</td><td>102</td><td>1</td><td>850</td></tr>
+        <tr><td>2025-08-03</td><td>SO-5003</td><td>103</td><td>3</td><td>9600</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="3">總銷售量</td><td>6</td><td>11350</td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <script>
+    // 可用於動態預覽日期或其他腳本
+  </script>
+</body>
+</html>
