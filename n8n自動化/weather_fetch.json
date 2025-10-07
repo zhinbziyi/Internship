@@ -1,0 +1,208 @@
+{
+  "name": "weather_fetch",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/weather",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{$json[\"body\"][\"q\"]}}"
+            },
+            {
+              "name": "appid",
+              "value": "eee48d8df711418c2b8ed4cb859e1303"
+            },
+            {
+              "name": "units",
+              "value": "metric"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "61a4a5c8-da64-415f-80a2-7b65797cce81",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7d182c13-d458-491f-9034-e228eb864572",
+              "name": "城市",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "05252ac5-ca5c-4d24-a26c-7607fc9ef45f",
+              "name": "國家",
+              "value": "={{ $json.sys.country }}",
+              "type": "string"
+            },
+            {
+              "id": "26bba02d-9c7d-41cb-9d87-51fb41856782",
+              "name": "溫度(°C)",
+              "value": "={{ $json.main.temp }}",
+              "type": "number"
+            },
+            {
+              "id": "0c765bf7-faed-4218-b848-42d6a70ce511",
+              "name": "天氣",
+              "value": "={{ $json.weather[0].main }}",
+              "type": "string"
+            },
+            {
+              "id": "4e2c9a3e-1b2d-407f-9d91-e488f032b098",
+              "name": "氣壓(hPa)",
+              "value": "={{ $json.main.pressure }}",
+              "type": "number"
+            },
+            {
+              "id": "e83a01b3-1443-403d-b5db-e39726210a16",
+              "name": "雲層覆蓋率",
+              "value": "={{ $json.clouds }}",
+              "type": "object"
+            },
+            {
+              "id": "55ed21b6-c146-4abd-af7c-e5891929bfa0",
+              "name": "coord",
+              "value": "={{ $json.coord }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        0
+      ],
+      "id": "4948eff3-e8f5-4dcd-8f17-453d3f7adb73",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-weather",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        20,
+        0
+      ],
+      "id": "222bdc8f-d5c1-40c2-b6bb-ad218f69e098",
+      "name": "Webhook",
+      "webhookId": "98ccbd6f-6885-403f-b460-aa52ff9b6a3a"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        620,
+        0
+      ],
+      "id": "f0df2e2d-cbe3-4030-b28d-ca40c24521ee",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "fromEmail": "kangxinyou@gmail.com",
+        "toEmail": "kangxinyou@gmail.com",
+        "subject": "今日天氣通知",
+        "html": "=<h2>📍 今日天氣</h2>\n<p>城市：{{ $json['城市'] }}</p>\n<p>氣溫：{{ $json['溫度(°C)'] }}°C</p>\n<p>天氣狀況：{{ $json['天氣'] }}</p>\n<p>氣壓：{{ $json['氣壓(hPa)'] }} hPa</p>\n<p>雲層覆蓋率：{{ $json['雲層覆蓋率'].all }}%</p>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        620,
+        -160
+      ],
+      "id": "1b491064-3fdd-4207-a008-ca3600b95bc9",
+      "name": "Send email",
+      "webhookId": "a362fce8-a3b9-4458-b681-2c28a1eceeba",
+      "credentials": {
+        "smtp": {
+          "id": "44OwBvWskSBUVXz3",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6a1c2124-d40a-4500-9163-be9e7288975f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b8c6afcf62225b2c880fea8402a9c4c9001d791a0d26d9aef84133c086321ed2"
+  },
+  "id": "jbaYMDHVqpjKz1S4",
+  "tags": []
+}

@@ -1,0 +1,96 @@
+{
+  "name": "webhook_test",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "928f0252-6966-48a6-97a8-855467cc95ca",
+              "name": "body.demo",
+              "value": "OK",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "body",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        180,
+        0
+      ],
+      "id": "93316066-114d-49c5-8a1f-77280afdac90",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        420,
+        0
+      ],
+      "id": "01075a33-f5ef-405a-b67d-72ca61daf6ed",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhook_test",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        0
+      ],
+      "id": "c94e86ac-3d3d-4a60-bb4e-d4211bb5afcd",
+      "name": "Webhook",
+      "webhookId": "4ae7dea0-e9c9-412b-9b24-8331598b9a1d"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5971b9c0-e759-4794-9f93-69221460a2e9",
+  "meta": {
+    "instanceId": "b8c6afcf62225b2c880fea8402a9c4c9001d791a0d26d9aef84133c086321ed2"
+  },
+  "id": "lzztjPNwLOkpcmLQ",
+  "tags": []
+}

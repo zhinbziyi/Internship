@@ -1,0 +1,120 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: linear-gradient(to bottom, #f5f7fa, #dbeafe);
+}
+
+body {
+  font-family: "Segoe UI", "Noto Sans TC", sans-serif;
+  background: linear-gradient(to bottom, #f5f7fa, #dbeafe);
+  padding: 10px 20px;
+  margin: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  border-radius: 16px;
+  padding: 30px 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  text-align: center;
+  color: #007aff;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 500;
+  color: #555;
+}
+
+select {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fefefe;
+  font-size: 15px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #007aff;
+  border: none;
+  color: white;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #005fcc;
+}
+
+
+
+.suggestion {
+  margin-left: 16px;
+  padding-left: 12px;
+  border-left: 3px solid #1e90ff;
+  color: #444;
+  margin-bottom: 0;
+}
+
+#content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+#result {
+  flex: 1 1 48%;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+#map {
+  flex: 1 1 48%;
+  height: 300px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  min-width: 300px;
+}
+
+/* 提高 RWD 相容性 */
+@media (max-width: 768px) {
+  #content-wrapper {
+    flex-direction: column;
+  }
+  #result,
+  #map {
+    flex: 1 1 100%;
+  }
+}
+
