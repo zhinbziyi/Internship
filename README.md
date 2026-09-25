@@ -61,7 +61,7 @@
 
 實習期間完成的前端練習，以《葬送的芙莉蓮》為主題，使用 HTML、CSS、JavaScript 與 JSON 實作資料呈現、角色篩選及角色詳細資訊頁面。
 
-➡️ [查看 Frieren 專案](請替換成 Frieren Repository 連結)
+➡️ [查看 Frieren 專案](https://zhinbziyi.github.io/Frieren/)
 
 ---
 
