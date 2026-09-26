@@ -42,4 +42,4 @@
 
 ## 線上展示
 
-目前專案以原始碼形式保存，後續將透過 GitHub Pages 提供線上 Demo。
+🌐 [開啟線上 Demo](https://zhinbziyi.github.io/Internship/報表測試/public/index2.html)
