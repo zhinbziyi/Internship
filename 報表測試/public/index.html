@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HTML→PDF 轉檔工具（動態尺寸 + 多表格）</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+    }
+
+    /* 預覽框初始寬度佔滿整條 */
+    #report {
+      width: 100%;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      display: block;
+      overflow: hidden;
+      box-sizing: border-box;
+      height: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 4px;
+      text-align: center;
+    }
+
+    .category-row td {
+      background: #eee;
+      text-align: left;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>HTML→PDF 轉檔工具</h1>
+  <p>貼入任意含 <code>&lt;table&gt;…&lt;/table&gt;</code> 的 HTML 片段，可同時支援多張表格，並動態預覽與下載 PDF。</p>
+
+  <textarea id="htmlSource" placeholder="請貼入 HTML 內容，例如完整的 &lt;table&gt;…&lt;/table&gt;"></textarea><br />
+
+  <button id="renderBtn">預覽 HTML</button>
+  <button id="pdfBtn">下載 PDF</button>
+
+  <div id="report" style="margin-top:1rem">
+    <p style="color:#888">請貼入 HTML，再按「預覽 HTML」</p>
+  </div>
+
+  <!-- 依賴庫 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    const renderBtn = document.getElementById('renderBtn');
+    const pdfBtn    = document.getElementById('pdfBtn');
+    const htmlSrc   = document.getElementById('htmlSource');
+    const reportDiv = document.getElementById('report');
+
+    // 預覽按鈕
+    renderBtn.addEventListener('click', () => {
+      const raw = htmlSrc.value.trim();
+      if (!raw) {
+        return alert('請先貼入 HTML 內容');
+      }
+
+      // 基本 HTML 標籤檢查
+      const hasHtmlTag = /<\s*[\w-]+.*?>[\s\S]*?<\/\s*[\w-]+>/i.test(raw);
+      if (!hasHtmlTag) {
+        return alert('這看起來不像 HTML，請貼入包含 <table> 或其他標籤的內容');
+      }
+
+      // 確認至少有一個 table
+      if (!/<table[\s\S]*?<\/table>/i.test(raw)) {
+        return alert('找不到任何 <table>…</table>，請確認格式！');
+      }
+
+      // 解析並取出所有表格
+      const doc = new DOMParser().parseFromString(raw, 'text/html');
+      const tables = doc.querySelectorAll('table');
+      if (tables.length === 0) {
+        return alert('HTML 中無法解析出 <table>，請檢查標籤完整性！');
+      }
+
+      // 清空預覽並插入
+      reportDiv.innerHTML = '';
+      tables.forEach((tbl, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.style.marginBottom = '1rem';
+        if (tables.length > 1) {
+          const title = document.createElement('h3');
+          title.textContent = `表格 ${idx + 1}`;
+          wrapper.appendChild(title);
+        }
+        wrapper.appendChild(tbl.cloneNode(true));
+        reportDiv.appendChild(wrapper);
+      });
+
+      // 等待渲染完畢後依內容動態撐滿寬高
+      setTimeout(() => {
+        reportDiv.style.width  = reportDiv.scrollWidth + 'px';
+        reportDiv.style.height = reportDiv.scrollHeight + 'px';
+      }, 0);
+    });
+
+    // 下載 PDF 按鈕
+    pdfBtn.addEventListener('click', async () => {
+      if (!reportDiv.querySelector('table')) {
+        return alert('請先完成「預覽 HTML」');
+      }
+
+      // 產生 canvas
+      const canvas = await html2canvas(reportDiv, { scale: 2, useCORS: true });
+      const pxToMm = px => px * 25.4 / 96;
+      const widthMm  = pxToMm(canvas.width);
+      const heightMm = pxToMm(canvas.height);
+      const { jsPDF } = window.jspdf;
+
+      // 輸出 PDF
+      const pdf = new jsPDF({
+        unit: 'mm',
+        format: [widthMm, heightMm],
+        orientation: widthMm > heightMm ? 'landscape' : 'portrait'
+      });
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, widthMm, heightMm);
+      pdf.save('report.pdf');
+
+      // 匯出後 清空預覽框 但保留輸入框
+      reportDiv.innerHTML = '<p style="color:#888">請貼入 HTML，再按「預覽 HTML」</p>';
+      reportDiv.style.width  = '100%';
+      reportDiv.style.height = 'auto';
+      htmlSrc.value = '';
+    });
+  </script>
+
+</body>
+
+</html>
