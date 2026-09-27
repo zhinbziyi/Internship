@@ -14,6 +14,7 @@
 | 新竹通 | 後台退費流程與使用案例整理 | Flowchart、Use Case |
 | 貿協後台－E 化學院 | 工項與 RA 文件整理 | 需求分析、文件整理 |
 | Frieren | JSON 資料運用與前端網頁實作 | HTML、CSS、JavaScript、JSON |
+| Python 先修練習 | 實習前程式能力測試題目 | Python |
 
 ---
 
