@@ -19,16 +19,15 @@
 
 ### 2. API 規劃與開發
 
-開發前先以 Excel 整理 API 規劃內容，再依規劃進行後端 API 實作。
+開發前先以試算表整理 API 規劃內容，再依規劃進行後端 API 實作。
 
-API 開發過程使用 C#，並透過 Postman 測試 API。
+API 開發過程使用 C#，並透過 Postman 進行功能測試。
 
 📁 [查看 API 資料](./API/)
 
 其中包含：
 - API 規劃文件
 - API 專案程式碼
-- API 說明文件
 
 ### 3. 資料庫規劃與建置
 
@@ -58,10 +57,10 @@ API 開發過程使用 C#，並透過 Postman 測試 API。
 - JSON
 - SQL Server
 - Postman
-- Excel
+- Google 試算表
 
 ## API 學習
 
-實習期間為完成後端 API 實作，參考 ASP.NET Core 教學資源學習 API 開發流程，並將所學應用於工時系統的 API 與資料庫串接。
+實習期間為完成後端 API 實作，參考 ASP.NET Core 教學資源學習 API 開發流程，並將所學應用於工時系統 API 實作。
 
 [ASP.NET Core 教學資源](https://blog.talllkai.com/ASPNETCore/Catalog)
